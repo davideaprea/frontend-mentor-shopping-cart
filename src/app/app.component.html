@@ -1,11 +1,15 @@
 <main>
-  <h1>Desserts</h1>
+  <section class="desserts">
+    <h1>Desserts</h1>
 
-  <div class="fluid-grid-xs item-list">
-    @for (item of items$ | async; track $index) {
-      <app-card [item]="item"></app-card>
-    }
-  </div>
+    <div class="fluid-grid-xs item-list">
+      @for (item of items$ | async; track $index) {
+        <app-card [item]="item"></app-card>
+      }
+    </div>
+  </section>
 
-  <app-cart></app-cart>
+  <aside class="shopping-cart">
+    <app-cart></app-cart>
+  </aside>
 </main>

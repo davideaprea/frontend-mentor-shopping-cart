@@ -1,5 +1,16 @@
 @import "variables";
 
+:host {
+  background-color: white;
+  display: block;
+  border-radius: 15px;
+  padding: 1.5em;
+}
+
+h2 {
+  color: $red;
+}
+
 .selected-item {
   display: flex;
   align-items: center;
@@ -10,4 +21,11 @@
 .item-info {
   display: flex;
   gap: 1rem;
+}
+
+.empty-cart {
+  text-align: center;
+  img {
+    display: inline;
+  }
 }

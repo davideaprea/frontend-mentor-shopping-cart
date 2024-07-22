@@ -1,3 +1,19 @@
-.item-list {
-  gap: 2rem;
+main {
+  padding: 4em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+
+  .shopping-cart {
+    flex: 2 0 Min(200px, 100%);
+  }
+
+  .desserts {
+    flex: 5 0 Min(500px, 100%);
+  }
+
+  .item-list {
+    gap: 2rem;
+  }
 }
+

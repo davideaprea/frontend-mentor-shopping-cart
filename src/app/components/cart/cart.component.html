@@ -1,23 +1,24 @@
 <section>
   <h2>Your Cart ({{totalItems}})</h2>
 
+  @if (totalItems > 0) {
   <ul>
     @for (item of itemSharingService.selectedItems | keyvalue; track $index) {
-      <li class="selected-item">
-        <div>
-          <h3>{{item.key.name}}</h3>
+    <li class="selected-item">
+      <div>
+        <h3>{{item.key.name}}</h3>
 
-          <div class="item-info">
-            <span>{{item.value}}x</span>
-            <span>${{item.key.price}}</span>
-            <span>${{item.key.price * item.value}}</span>
-          </div>
+        <div class="item-info">
+          <span>{{item.value}}x</span>
+          <span>${{item.key.price}}</span>
+          <span>${{item.key.price * item.value}}</span>
         </div>
+      </div>
 
-        <button (click)="deleteItem(item.key)">
-          <img src="images/icon-remove-item.svg" alt="Delete selected items">
-        </button>
-      </li>
+      <button (click)="deleteItem(item.key)">
+        <img src="images/icon-remove-item.svg" alt="Delete selected items">
+      </button>
+    </li>
     }
   </ul>
 
@@ -25,4 +26,12 @@
     <p>Order Total</p>
     <p>${{totalPrice}}</p>
   </div>
+  }
+  @else {
+    <div class="empty-cart">
+      <img src="images/illustration-empty-cart.svg" alt="Empty cart image">
+      <p>Your added items will appear here</p>
+    </div>
+  }
+
 </section>
