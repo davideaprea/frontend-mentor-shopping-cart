@@ -1,0 +1,8 @@
+@import "variables";
+
+@each $key, $value in $breakpoints {
+  .fluid-grid-#{$key} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(Min($value, 100%), 1fr));
+  }
+}

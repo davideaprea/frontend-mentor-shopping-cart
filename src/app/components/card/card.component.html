@@ -1,0 +1,40 @@
+<article>
+  <div class="top-container">
+    <picture>
+      <source class="item-pic" [srcset]="item.image.mobile">
+      <source class="item-pic" media="(min-width: 700px)" [srcset]="item.image.tablet">
+      <source class="item-pic" media="(min-width: 1400px)" [srcset]="item.image.desktop">
+      <img
+        class="item-pic"
+        [ngClass]="{'selected-state': selectedQuantity > 0}"
+        [src]="item.image.thumbnail"
+        [alt]="item.name + ' thumbnail'">
+    </picture>
+
+    @if (selectedQuantity == 0) {
+    <button (click)="incrementQuantity()" class="base-btn-layout add-to-cart">
+      <img src="images/icon-add-to-cart.svg" alt="Add to cart">
+      Add to cart
+    </button>
+    }
+    @else {
+    <div class="base-btn-layout btn-selected">
+      <button class="edit-quantity-btn" (click)="decrementQuantity()">
+        <img src="images/icon-decrement-quantity.svg" alt="Decrement quantity">
+      </button>
+
+      <span>{{selectedQuantity}}</span>
+
+      <button class="edit-quantity-btn" (click)="incrementQuantity()">
+        <img src="images/icon-increment-quantity.svg" alt="Increment quantity">
+      </button>
+    </div>
+    }
+  </div>
+
+  <div>
+    <p class="category">{{item.category}}</p>
+    <h3 class="item-title">{{item.name}}</h3>
+    <p class="price">{{item.price}}</p>
+  </div>
+</article>

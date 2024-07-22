@@ -1,0 +1,13 @@
+@import "variables";
+
+.selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $rose-300;
+}
+
+.item-info {
+  display: flex;
+  gap: 1rem;
+}
