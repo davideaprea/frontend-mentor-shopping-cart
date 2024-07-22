@@ -2,7 +2,7 @@
   <h2>Your Cart ({{totalItems}})</h2>
 
   <ul>
-    @for (item of itemMap | keyvalue; track $index) {
+    @for (item of itemSharingService.selectedItems | keyvalue; track $index) {
       <li class="selected-item">
         <div>
           <h3>{{item.key.name}}</h3>

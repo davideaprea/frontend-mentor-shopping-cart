@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Item } from '../../models/item.type';
 import { NgClass } from '@angular/common';
+import { ItemSharingService } from '../../services/item-sharing.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -12,26 +14,32 @@ import { NgClass } from '@angular/common';
   styleUrl: './card.component.scss',
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent {
-  private _selectedQuantity: number = 0;
-  @Output() private selectedQuantityChange: EventEmitter<number> = new EventEmitter<number>();
+export class CardComponent implements OnInit{
+  private readonly itemSharingService: ItemSharingService = inject(ItemSharingService);
 
-  @Input({required: true}) item!: Item;
-
-  @Input() set selectedQuantity(quantity: number | undefined) {
-    if(!quantity || quantity < 0) this._selectedQuantity = 0;
-    else this._selectedQuantity = quantity;
+  ngOnInit(): void {
+    this.itemSharingService.itemQuantity$
+    .pipe(
+      filter(change => change.item.name == this.item.name)
+    )
+    .subscribe(change => this.selectedQuantity = change.quantity);
   }
 
+  @Input({ required: true }) item!: Item;
+
+  selectedQuantity: number = 0;
+
   incrementQuantity(): void {
-    this.selectedQuantityChange.emit(++this._selectedQuantity);
+    this.itemSharingService.itemQuantity$.next({
+      item: this.item,
+      quantity: ++this.selectedQuantity
+    });
   }
 
   decrementQuantity(): void {
-    this.selectedQuantityChange.emit(--this._selectedQuantity);
-  }
-
-  get selectedQuantity(): number {
-    return this._selectedQuantity;
+    this.itemSharingService.itemQuantity$.next({
+      item: this.item,
+      quantity: --this.selectedQuantity
+    });
   }
 }

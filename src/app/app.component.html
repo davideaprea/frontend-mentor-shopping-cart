@@ -3,14 +3,9 @@
 
   <div class="fluid-grid-xs item-list">
     @for (item of items$ | async; track $index) {
-      <app-card
-        [item]="item"
-        [selectedQuantity]="selectedItems[item.name]"
-        (selectedQuantityChange)="changeQuantity($event, item)"
-      >
-      </app-card>
+      <app-card [item]="item"></app-card>
     }
   </div>
 
-  <app-cart [itemQuantity$]="itemQuantity$"></app-cart>
+  <app-cart></app-cart>
 </main>
