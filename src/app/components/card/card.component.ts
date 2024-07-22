@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { Item } from '../../models/item.type';
 import { NgClass } from '@angular/common';
 import { ItemSharingService } from '../../services/item-sharing.service';
@@ -12,9 +12,10 @@ import { filter } from 'rxjs';
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit{
+  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly itemSharingService: ItemSharingService = inject(ItemSharingService);
 
   ngOnInit(): void {
@@ -22,7 +23,10 @@ export class CardComponent implements OnInit{
     .pipe(
       filter(change => change.item.name == this.item.name)
     )
-    .subscribe(change => this.selectedQuantity = change.quantity);
+    .subscribe(change => {
+      this.selectedQuantity = change.quantity;
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   @Input({ required: true }) item!: Item;

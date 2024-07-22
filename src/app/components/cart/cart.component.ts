@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Item } from '../../models/item.type';
 import { KeyValuePipe } from '@angular/common';
 import { ItemSharingService } from '../../services/item-sharing.service';
@@ -9,9 +9,11 @@ import { ItemSharingService } from '../../services/item-sharing.service';
   imports: [KeyValuePipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartComponent implements OnInit{
+  private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+
   readonly itemSharingService: ItemSharingService = inject(ItemSharingService);
 
   totalItems: number = 0;
@@ -26,6 +28,8 @@ export class CartComponent implements OnInit{
 
       this.totalItems += quantityDiff;
       this.totalPrice += quantityDiff * change.item.price;
+
+      this.changeDetectorRef.markForCheck();
     });
   }
 

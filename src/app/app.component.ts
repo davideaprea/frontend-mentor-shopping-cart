@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ItemService } from './services/item.service';
 import { Item } from './models/item.type';
@@ -17,7 +17,8 @@ import { CartComponent } from './components/cart/cart.component';
     CartComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   private readonly itemService: ItemService = inject(ItemService);
