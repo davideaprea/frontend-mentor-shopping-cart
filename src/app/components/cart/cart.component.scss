@@ -1,5 +1,7 @@
 @import "variables";
 
+$margin: 1.5em;
+
 :host {
   background-color: white;
   display: block;
@@ -11,11 +13,16 @@ h2 {
   color: $red;
 }
 
+.selected-item-list {
+  margin-bottom: $margin;
+}
+
 .selected-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid $rose-300;
+  padding-block: 1em;
 }
 
 .item-info {
@@ -28,4 +35,35 @@ h2 {
   img {
     display: inline;
   }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $margin;
+}
+
+.confirm-order {
+  color: white;
+  padding: .5em 1em;
+  border-radius: 2em;
+  background-color: $red;
+  display: block;
+  width: 100%;
+}
+
+.item-quantity {
+  color: $red;
+}
+
+.carbon-neutral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: $rose-100;
+  padding: 1em;
+  margin-bottom: $margin;
+  border-radius: .5em;
 }
