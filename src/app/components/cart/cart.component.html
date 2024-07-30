@@ -1,17 +1,18 @@
 <section>
-  <h2>Your Cart ({{totalItems}})</h2>
+  <h2>Your Cart ({{itemSharingService.totalItems}})</h2>
 
-  @if (totalItems > 0) {
+  @if (itemSharingService.totalItems > 0) {
   <ul class="selected-item-list">
     @for (item of itemSharingService.selectedItems | keyvalue; track $index) {
+    @if(item.value.value > 0) {
     <li class="selected-item">
       <div>
         <h3>{{item.key.name}}</h3>
 
         <div class="item-info">
-          <span class="item-quantity">{{item.value}}x</span>
+          <span class="item-quantity">{{item.value.value}}x</span>
           <span>&commat;{{item.key.price}}</span>
-          <span>${{item.key.price * item.value}}</span>
+          <span>${{item.key.price * item.value.value}}</span>
         </div>
       </div>
 
@@ -20,11 +21,12 @@
       </button>
     </li>
     }
+    }
   </ul>
 
   <div class="total">
     <p>Order Total</p>
-    <p>${{totalPrice}}</p>
+    <p>${{itemSharingService.totalPrice}}</p>
   </div>
 
   <div class="carbon-neutral">
@@ -35,10 +37,10 @@
   <button class="confirm-order" type="submit">Confirm Order</button>
   }
   @else {
-    <div class="empty-cart">
-      <img src="images/illustration-empty-cart.svg" alt="Empty cart image">
-      <p>Your added items will appear here</p>
-    </div>
+  <div class="empty-cart">
+    <img src="images/illustration-empty-cart.svg" alt="Empty cart image">
+    <p>Your added items will appear here</p>
+  </div>
   }
 
 </section>

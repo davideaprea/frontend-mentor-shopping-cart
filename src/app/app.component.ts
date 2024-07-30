@@ -18,7 +18,6 @@ import { CartComponent } from './components/cart/cart.component';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   private readonly itemService: ItemService = inject(ItemService);
