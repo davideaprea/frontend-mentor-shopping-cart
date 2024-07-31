@@ -19,7 +19,9 @@ export class CartComponent {
   readonly itemSharingService: ItemSharingService = inject(ItemSharingService);
 
   constructor() {
-    this.itemSharingService.itemsChangeObs$.subscribe(() => this.changeDetectorRef.markForCheck());
+    this.itemSharingService
+    .itemsChangeObs$
+    .subscribe(() => this.changeDetectorRef.markForCheck());
   }
 
   deleteItem(item: Item): void {
